@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image compressor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+    
+            .container {
+                margin-top: 50px;
+            }
+    
+            .card {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+    
+            .card:hover {
+                transform: scale(1.02);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+    
+            .card-header {
+                background-color: #17a2b8;
+                color: white;
+            }
+    
+            .btn-outline-info {
+                border-color: #17a2b8;
+                color: #17a2b8;
+            }
+    
+            .btn-outline-info:hover {
+                background-color: #17a2b8;
+                color: white;
+            }
+    
+            .btn-outline-success {
+                border-color: #28a745;
+                color: #28a745;
+            }
+    
+            .btn-outline-success:hover {
+                background-color: #28a745;
+                color: white;
+            }
+    
+            .alert {
+                border-radius: 5px;
+            }
+        </style>
+
+    </head>
+
+<body>
+    <div class="container text-center mt-2">
+        <h1 class="alert alert-info">Welcome to Image Compress System</h1>
+        <div class="card" style="width: 18rem; margin: 0 auto;">
+            <h3 class="card-header">Please Choose a File</h3>
+            <div class="card-body">
+                <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                    <input id="fileInput" type="file" name="user_img" class="form-control" />
+                    <button type="submit" class="btn btn-outline-info mt-3">Upload</button>
+                </form>
+            </div>
+        </div>
+
+        <% if (compressedFilePath) { %>
+            <div class="mt-4">
+                <h3 class="alert alert-success">File Compressed Successfully!</h3>
+                <a href="/<%= compressedFilePath %>" class="btn btn-outline-success" download>Download Compressed
+                    Image</a>
+            </div>
+            <% } %>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        // JavaScript function to check if a file is selected before form submission
+        function checkFileSelected() {
+            var fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length === 0) {
+                alert('Please select a file before uploading.');
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+
+        // Add an event listener to the form submission
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            if (!checkFileSelected()) {
+                event.preventDefault(); // Prevent form submission if file is not selected
+            }
+        });
+    </script>
+</body>
+
+</html>
